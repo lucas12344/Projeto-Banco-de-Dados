@@ -4,8 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Lucas%20Oliveira/Documents/NetBeansProjects/ProjetoLanchoneteBD/src/telas/Principal.java</file>
-            <file>file:/C:/Users/Lucas%20Oliveira/Documents/NetBeansProjects/ProjetoLanchoneteBD/src/telas/TelaAguarde.java</file>
-            <file>file:/C:/Users/Lucas%20Oliveira/Documents/NetBeansProjects/ProjetoLanchoneteBD/src/telas/Login.java</file>
+            <file>file:/C:/Users/Lucas%20Oliveira/Documents/NetBeansProjects/ProjetoLanchoneteBD/src/model/bean/Usuario.java</file>
+            <file>file:/C:/Users/Lucas%20Oliveira/Documents/NetBeansProjects/ProjetoLanchoneteBD/src/model/dao/UsuarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

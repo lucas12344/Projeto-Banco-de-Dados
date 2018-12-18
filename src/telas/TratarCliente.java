@@ -59,7 +59,7 @@ public class TratarCliente extends javax.swing.JInternalFrame {
         
         for (Cliente c: cdao.readForDesc(desc)){
             modelo.addRow(new Object []{
-              c.getId(),
+                c.getId(),
                 c.getNome(),
                 c.getCpf(),
                 c.getDataNasc(),
@@ -103,8 +103,8 @@ public class TratarCliente extends javax.swing.JInternalFrame {
         txtEmail = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        txtBuscaDesc2 = new javax.swing.JTextField();
+        busca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTClientes = new javax.swing.JTable();
 
@@ -242,7 +242,12 @@ public class TratarCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("Buscar");
+        busca.setText("Buscar");
+        busca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaActionPerformed(evt);
+            }
+        });
 
         jTClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -285,9 +290,9 @@ public class TratarCliente extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(38, 38, 38)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscaDesc2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(busca)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -307,8 +312,8 @@ public class TratarCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBuscaDesc2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(busca, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -324,11 +329,11 @@ public class TratarCliente extends javax.swing.JInternalFrame {
 
             txtNome.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 1).toString());
             txtCPF.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 2).toString());
-            txtEndereco.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 3).toString());
-            txtContato.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 4).toString());
-            txtEmail.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 5).toString());
-            txtDataNasc.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 6).toString());
-            jcSexo.setSelectedItem(jTClientes.getValueAt(jTClientes.getSelectedRow(), 7).toString());
+            txtEndereco.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 5).toString());
+            txtContato.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 6).toString());
+            txtEmail.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 7).toString());
+            txtDataNasc.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 3).toString());
+            jcSexo.setSelectedItem(jTClientes.getValueAt(jTClientes.getSelectedRow(), 4).toString());
         }
     }//GEN-LAST:event_jTClientesMouseClicked
 
@@ -343,12 +348,11 @@ public class TratarCliente extends javax.swing.JInternalFrame {
             
             txtNome.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 1).toString());
             txtCPF.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 2).toString());
-            txtEndereco.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 3).toString());
-            txtContato.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 4).toString());
-            txtEmail.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 5).toString());
-            txtDataNasc.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 6).toString());
-            jcSexo.setSelectedItem(jTClientes.getValueAt(jTClientes.getSelectedRow(), 7).toString());
-
+            txtEndereco.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 5).toString());
+            txtContato.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 6).toString());
+            txtEmail.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 7).toString());
+            txtDataNasc.setText(jTClientes.getValueAt(jTClientes.getSelectedRow(), 3).toString());
+            jcSexo.setSelectedItem(jTClientes.getValueAt(jTClientes.getSelectedRow(), 4).toString());
         }
     }//GEN-LAST:event_jTClientesKeyReleased
 
@@ -361,6 +365,7 @@ public class TratarCliente extends javax.swing.JInternalFrame {
 
             c.setNome(txtNome.getText());
             c.setCpf(txtCPF.getText());
+            c.setSexo(jcSexo.getSelectedItem().toString());
             c.setDataNasc(txtDataNasc.getText());
             c.setEndereco(txtEndereco.getText());
             c.setContato(txtContato.getText());
@@ -404,17 +409,21 @@ public class TratarCliente extends javax.swing.JInternalFrame {
             readJTable();
 
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um produto para excluir.");
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para excluir.");
         }
 
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaActionPerformed
+        readTableForDesc(txtBuscaDesc2.getText());
+    }//GEN-LAST:event_buscaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton busca;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -425,8 +434,8 @@ public class TratarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTClientes;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> jcSexo;
+    private javax.swing.JTextField txtBuscaDesc2;
     private javax.swing.JFormattedTextField txtCPF;
     private javax.swing.JFormattedTextField txtContato;
     private javax.swing.JFormattedTextField txtDataNasc;

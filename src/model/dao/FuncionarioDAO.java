@@ -48,7 +48,7 @@ public class FuncionarioDAO {
         List<Funcionario> funcionarios = new ArrayList<>();
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM cliente");
+            stmt = con.prepareStatement("SELECT * FROM funcionario");
             rs = stmt.executeQuery();
             
             while (rs.next()){
@@ -83,20 +83,22 @@ public class FuncionarioDAO {
         
         
         try {
-            stmt = con.prepareStatement("UPDATE funcionario SET nome = ?, cpf = ?, datanasc = ?, sexo = ?, endereco = ?, contato = ?, email = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE funcionario SET nome = ?, data_nascimento = ?, endereco = ?, telefone = ? WHERE id = ?");
             
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getData_nascimento());
             stmt.setString(3, f.getEndereco());
             stmt.setString(4, f.getTelefone());
-            stmt.setString(5, f.getCargo());
+            
+            //TIREI O CARGIO DE UPDATE
         
             stmt.executeUpdate();
             
             JOptionPane.showMessageDialog(null,"Atualizado com sucesso!!");
             
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null,"Erro ao atualizar: "+ex);
+           JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+           // JOptionPane.showMessageDialog(null,"Erro ao atualizar: "+ex);
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -145,7 +147,7 @@ public class FuncionarioDAO {
                 funcionario.setData_nascimento(rs.getString("data_nascimento"));
                 funcionario.setEndereco(rs.getString("endereco"));
                 funcionario.setTelefone(rs.getString("telefone"));
-                funcionario.setCargo(rs.getString("cargo"));
+                //funcionario.setCargo(rs.getString("cargo"));
                 
                 funcionarios.add(funcionario);
                 

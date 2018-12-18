@@ -5,10 +5,19 @@
  */
 
 package telas;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import connection.ConnectionFactory;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +71,8 @@ public class Principal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -71,6 +82,10 @@ public class Principal extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
 
@@ -92,17 +107,17 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1316, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+                .addContainerGap(252, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(305, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(0, 153, 204));
@@ -124,7 +139,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem11.setText("Atualizar/Remover");
+        jMenuItem11.setText("Consultar/Atualizar/Remover");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
@@ -138,9 +153,19 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Controle de Caixa");
 
         jMenuItem4.setText("Entrada");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText(" Saída");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
@@ -169,6 +194,22 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem13);
 
+        jMenuItem16.setText("Relatório de Entrada no Caixa");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem16);
+
+        jMenuItem17.setText("Relatório de Saída do Caixa");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem17);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user_suit.png"))); // NOI18N
@@ -184,7 +225,12 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.add(jMenuItem8);
 
         jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user_edit.png"))); // NOI18N
-        jMenuItem12.setText("Atualizar/Remover");
+        jMenuItem12.setText("Consultar/Atualizar/Remover");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem12);
 
         jMenuBar1.add(jMenu4);
@@ -202,7 +248,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem1);
 
         jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user_edit.png"))); // NOI18N
-        jMenuItem15.setText("Atualizar/Remover");
+        jMenuItem15.setText("Consultar/Atualizar/Remover");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem15ActionPerformed(evt);
@@ -225,10 +271,51 @@ public class Principal extends javax.swing.JFrame {
         jMenu7.add(jMenuItem2);
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user_edit.png"))); // NOI18N
-        jMenuItem9.setText("Remover/Atualizar");
+        jMenuItem9.setText("Alterar senha");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem9);
 
         jMenuBar1.add(jMenu7);
+
+        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/page_white_text.png"))); // NOI18N
+        jMenu9.setText("Termos");
+        jMenu9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu9ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem7.setText("Termo de Contrato - Funcionário");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu9);
+
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/information.png"))); // NOI18N
+        jMenu8.setText("Sobre");
+        jMenu8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu8ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem6.setText("Sobre o Sistema");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu8);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/door_out.png"))); // NOI18N
         jMenu5.setText("Sair");
@@ -338,8 +425,8 @@ public class Principal extends javax.swing.JFrame {
         
         String src = "clientescad.jasper";
          
-       final TelaAguarde carregando = new TelaAguarde();
-       carregando.setVisible(true);
+      // final TelaAguarde carregando = new TelaAguarde();
+       //carregando.setVisible(true);
 //       
 //       Thread t = new Thread(){
 //           public void run(){
@@ -374,6 +461,117 @@ public class Principal extends javax.swing.JFrame {
         telaTrataCliente.setVisible(true);
         telaTrataCliente.setPosicao();
     }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
+       
+    }//GEN-LAST:event_jMenu8ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+       Sobre telaSobre = new Sobre();
+       jDesktopPane1.add(telaSobre);
+        telaSobre.setVisible(true);
+        telaSobre.setPosicao();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+       TratarFuncionario telaTrataFuncionario = new TratarFuncionario();
+       jDesktopPane1.add(telaTrataFuncionario);
+       telaTrataFuncionario.setVisible(true);
+       telaTrataFuncionario.setPosicao();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+       TratarUser telaTrataUser = new TratarUser();
+       jDesktopPane1.add(telaTrataUser);
+       telaTrataUser.setVisible(true);
+       telaTrataUser.setPosicao();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
+        
+    }//GEN-LAST:event_jMenu9ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       TelaEntradaCaixa telacxEntrada = new TelaEntradaCaixa();
+       jDesktopPane1.add(telacxEntrada);
+       telacxEntrada.setVisible(true);
+       telacxEntrada.setPosicao();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+       TelaSaidaCaixa telacxSaida = new TelaSaidaCaixa();
+       jDesktopPane1.add(telacxSaida);
+       telacxSaida.setVisible(true);
+       telacxSaida.setPosicao();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        
+        try{
+            Desktop.getDesktop().open(new File("contrato1.pdf"));
+        }catch(IOException ex){
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        
+
+//Document document = new Document();
+//        try {
+//            PdfWriter.getInstance(document, new FileOutputStream("contrato.pdf"));
+//            
+//            document.open();
+//            document.add(new Paragraph("Tcahu, querida!"));
+//        } catch (FileNotFoundException | DocumentException ex) {
+//            System.out.println("Error"+ex);
+//        }finally{
+//            document.close();
+//        }
+//        try {
+//            Desktop.getDesktop().open(new File("contrato.pdf"));
+//        } catch (IOException ex) {
+//              System.out.println("Error"+ex);
+//        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        
+         Connection conn = ConnectionFactory.getConnection(); 
+        
+        String src = "cxentrada.jasper";
+        
+        JasperPrint jasperPrint = null;
+        
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, null, conn);
+        } catch (JRException ex) {
+            System.out.println("Error: "+ ex);
+        }
+        
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        
+        view.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+          Connection conn = ConnectionFactory.getConnection(); 
+        
+        String src = "cxsaida.jasper";
+        
+        JasperPrint jasperPrint = null;
+        
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, null, conn);
+        } catch (JRException ex) {
+            System.out.println("Error: "+ ex);
+        }
+        
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        
+        view.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     
     /**
@@ -422,6 +620,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -430,10 +630,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables

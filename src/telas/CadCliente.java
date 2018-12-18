@@ -226,6 +226,7 @@ public class CadCliente extends javax.swing.JInternalFrame {
         txtEndereco.setText("");
         txtContato.setText("");
         txtEmail.setText("");
+        jcSexo.setSelectedIndex(0);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
